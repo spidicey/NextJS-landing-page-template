@@ -11,24 +11,28 @@ import Navbar from "@/components/Navbar";
 export default function Home() {
   return (
     <>
-      <Navbar />
-
       {/* Hero */}
       <MaxWidthWrapper className="mt-10 flex flex-col items-center justify-center text-center sm:mt-12">
-        <div className="mx-auto mb-4 flex max-w-fit items-center justify-center space-x-2 overflow-hidden rounded-full border border-gray-200 bg-white px-7 py-2 shadow-md backdrop-blur transition-all hover:border-gray-300 hover:bg-white/50">
+        {/* <div className="mx-auto mb-4 flex max-w-fit items-center justify-center space-x-2 overflow-hidden rounded-full border border-gray-200 bg-white px-7 py-2 shadow-md backdrop-blur transition-all hover:border-gray-300 hover:bg-white/50">
           <p className="text-sm font-semibold text-gray-700">
             Try Convo for Free
           </p>
-        </div>
+        </div> */}
 
         <h1 className="max-w-4xl text-5xl font-bold md:text-6xl lg:text-7xl">
-          <span className="text-blue-600">Speech</span> Focused Language
-          Learning
+          Dịch vụ sửa chữa đồ gia dụng chuyên nghiệp 24/24
         </h1>
 
         <p className="mt-5 max-w-prose text-lg text-zinc-700 sm:text-2xl">
-          Convo helps you improve your spoken fluency with the help of an AI
-          tutor.
+          Các dịch vụ sửa chữa đồ điện gia dụng tại A Hàng Đức A Hàng Đức nhận
+          sửa chữa các loại đồ điện gia dụng như: Sửa nồi cơm điện, sửa robot
+          hút bụi, nồi chiên không dầu, lò vi sóng, lò nướng, sửa máy pha café,
+          sửa máy trộn bột, sửa máy giặt, tủ lạnh, máy lạnh – điều hòa, sửa bếp
+          từ, máy hút mùi, máy xay sinh tố… Khách hàng khi có nhu cầu khắc phục
+          mọi sự cố trên thiết bị gia dụng hãy liên hệ chúng tôi. Với nhiều năm
+          kinh nghiệm sửa đồ điện gia dụng, A hàng Đức cam kết mang đến cho quý
+          khách dịch vụ uy tín, tận tâm cùng chi phí tiết kiệm nhất thị trường.
+          Vui lòng liên hệ:
         </p>
 
         <Link
@@ -39,9 +43,9 @@ export default function Home() {
             }),
             "text-lg",
           )}
-          href={"/dashboard"}
+          href={"/dat-lich"}
         >
-          Start Speaking Now
+          Đặt lịch ngay
         </Link>
       </MaxWidthWrapper>
 
@@ -66,7 +70,7 @@ export default function Home() {
               <div className="mt-8 flow-root sm:mt-16">
                 <div className="-m-2 w-fit rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10  lg:-m-4 lg:rounded-2xl lg:p-4">
                   <Image
-                    src="/dashboard-preview.png"
+                    src="/dvsc.jpeg"
                     alt="product preview"
                     width={955}
                     height={808}
@@ -96,72 +100,9 @@ export default function Home() {
       {/* Features */}
       <MaxWidthWrapper>
         <div className="mx-auto mt-20 flex max-w-5xl flex-col gap-20 sm:mt-40 sm:gap-40 ">
-          {/* Intro */}
-          <div>
-            <div className="mb-6 px-6 lg:px-8">
-              <div className="mx-auto max-w-2xl sm:text-center">
-                <h2 className="mt-2 text-4xl font-bold text-gray-900 sm:text-5xl">
-                  Start your first session in seconds
-                </h2>
-                <p className="mt-4 text-lg text-gray-600">
-                  Improving your spoken fluency has never been easier than with
-                  Convo.
-                </p>
-              </div>
-            </div>
-            {/* steps */}
-
-            <ol className="my-2 space-y-4 pt-2 md:flex md:space-x-6 md:space-y-0 md:px-8">
-              <li className="md:flex-1">
-                <div className="flex flex-col space-y-2 border-l-4 border-zinc-300 py-2 pl-4 md:border-l-0 md:border-t-2 md:pb-0 md:pl-0 md:pt-4">
-                  <span className="text-sm font-medium text-blue-600">
-                    Step 1
-                  </span>
-                  <span className="text-xl font-semibold">
-                    Sign up for a Free Account
-                  </span>
-                  {/* <span className="mt-2 text-zinc-700">
-                Either starting out with a free plan or choose our{" "}
-                <Link
-                  href="/pricing"
-                  className="text-blue-700 underline underline-offset-2"
-                >
-                  pro plan
-                </Link>
-                .
-              </span> */}
-                </div>
-              </li>
-              <li className="md:flex-1">
-                <div className="flex flex-col space-y-2 border-l-4 border-zinc-300 py-2 pl-4 md:border-l-0 md:border-t-2 md:pb-0 md:pl-0 md:pt-4">
-                  <span className="text-sm font-medium text-blue-600">
-                    Step 2
-                  </span>
-                  <span className="text-xl font-semibold">
-                    Choose a <span className="text-blue-600">Language</span> &{" "}
-                    <span className="text-blue-600">Scenario</span>
-                  </span>
-                </div>
-              </li>
-              <li className="md:flex-1">
-                <div className="flex flex-col space-y-2 border-l-4 border-zinc-300 py-2 pl-4 md:border-l-0 md:border-t-2 md:pb-0 md:pl-0 md:pt-4">
-                  <span className="text-sm font-medium text-blue-600">
-                    Step 3
-                  </span>
-                  <span className="text-xl font-semibold">
-                    Start Your Speaking Session
-                  </span>
-                  {/* <span className="mt-2 text-zinc-700">
-                
-              </span> */}
-                </div>
-              </li>
-            </ol>
-          </div>
-
           {/* Scenarios */}
           <div>
-            <div className="mb-6 px-6 lg:px-8">
+            {/* <div className="mb-6 px-6 lg:px-8">
               <div className="mx-auto max-w-2xl sm:text-center">
                 <h2 className="mt-2 text-4xl font-bold text-gray-900 sm:text-5xl">
                   Practice in Real Life Scenarios
@@ -171,18 +112,18 @@ export default function Home() {
                   something in your target language.
                 </p>
               </div>
-            </div>
+            </div> */}
             {/* steps */}
 
             <div className="flex items-center justify-center">
               <div className="flex flex-col gap-6 md:flex-row">
                 <Card className="flex flex-col items-center justify-center gap-2 p-6 md:flex-1">
-                  <CardTitle>At the Cafe</CardTitle>
+                  <CardTitle>Bảo hành</CardTitle>
                   <CardDescription className="mb-3 text-center">
-                    Learn how to order drinks and snacks
+                    Cam kết bảo hành sau sửa chữa
                   </CardDescription>
                   <Image
-                    src="/coffee.webp"
+                    src="/bao-hanh-chuyen-nghiep.png.webp"
                     alt="cafe scenario"
                     width={128}
                     height={128}
@@ -190,12 +131,12 @@ export default function Home() {
                   />
                 </Card>
                 <Card className="flex flex-col items-center justify-center gap-2 p-6 md:flex-1">
-                  <CardTitle>Getting A Taxi</CardTitle>
+                  <CardTitle>Tư vấn 24/7</CardTitle>
                   <CardDescription className="mb-3 text-center">
-                    Learn how to navigate and get directions
+                    Luôn lắng nghe và giải đáp mọi thắc mắc
                   </CardDescription>
                   <Image
-                    src="/taxi.webp"
+                    src="/tu-van-24h.png.webp"
                     alt="cafe scenario"
                     width={128}
                     height={128}
@@ -204,12 +145,12 @@ export default function Home() {
                 </Card>
 
                 <Card className="flex flex-col items-center justify-center gap-2 p-6 md:flex-1">
-                  <CardTitle>Social Activities</CardTitle>
+                  <CardTitle>Giá tốt nhất</CardTitle>
                   <CardDescription className="mb-3 text-center">
-                    Learn how to make plans and catch up with friends
+                    Chúng tôi đem đến giá trị và chi phí tốt nhất
                   </CardDescription>
                   <Image
-                    src="/schedule.webp"
+                    src="/Gia-uu-dai.png.webp"
                     alt="cafe scenario"
                     width={128}
                     height={128}
