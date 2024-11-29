@@ -34,7 +34,7 @@ export default function ChangePasswordForm() {
 
   useEffect(() => {
     console.log();
-    const token = searchParams.get("token");
+    const token = searchParams?.get("client-token");
     if (token) {
       try {
         const decoded = jwtDecode<DecodedToken>(token);
