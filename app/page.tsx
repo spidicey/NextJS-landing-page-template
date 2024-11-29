@@ -9,6 +9,8 @@ import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 
 export default function Home() {
+  const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+  console.log(apiUrl, 123123);
   return (
     <>
       {/* Hero */}

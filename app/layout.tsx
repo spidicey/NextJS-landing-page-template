@@ -9,14 +9,9 @@ import Navbar from "@/components/Navbar";
 import { useEffect } from "react";
 
 // Declare the custom element
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      "df-messenger": any;
-    }
-  }
-}
 import Script from "next/script";
+import Providers from "@/components/Providers";
+import ChatbotBubble from "@/components/ChatBubble";
 
 // export const metadata: Metadata = {
 //   title: "Convo | Language Learning",
@@ -30,28 +25,19 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="light">
-      <head>
-        <Script
-          src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"
-          strategy="beforeInteractive"
-        />
-      </head>
-      <body
-        className={cn(
-          "grainy flex min-h-screen flex-col font-sans antialiased",
-          GeistSans.className,
-        )}
-      >
-        <Navbar />
-        {children}
-        <Toaster />
-        <df-messenger
-          intent="WELCOME"
-          chat-title="baotrisuachua"
-          agent-id="e825dced-77fe-494a-b540-4f5adcbe62a4"
-          language-code="vi"
-        ></df-messenger>
-      </body>
+      <Providers>
+        <body
+          className={cn(
+            "grainy flex min-h-screen flex-col font-sans antialiased",
+            GeistSans.className,
+          )}
+        >
+          <Navbar />
+          {children}
+          <ChatbotBubble/>
+          <Toaster />
+        </body>
+      </Providers>
     </html>
   );
 }
