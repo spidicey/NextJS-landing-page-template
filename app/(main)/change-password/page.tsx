@@ -59,7 +59,7 @@ export default function ChangePasswordForm() {
 
     try {
       const response = await fetch(
-        "http://localhost:8080/api/auth/account/password",
+        "${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/account/password",
         {
           method: "PUT",
           headers: {

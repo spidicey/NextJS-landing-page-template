@@ -6,7 +6,7 @@ import React from "react";
 import useSWR from "swr";
 export default function Page() {
   const { data, isLoading, error } = useSWR<ResponseData<LinhKien[]>>(
-    `http://localhost:8080/api/kho/linhkien`,
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/kho/linhkien`,
     fetcher,
   );
   console.log(data?.data);

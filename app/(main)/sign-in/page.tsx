@@ -38,7 +38,7 @@ export default function LoginForm() {
     console.log(data);
     try {
       const signInResponse = await fetch(
-        "http://localhost:8080/api/auth/account/login",
+        "${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/account/login",
         {
           method: "POST",
           headers: {

@@ -20,7 +20,7 @@ export default function KhachHangPage() {
       setDecoded(decodedToken);
       fetch(
         // @ts-ignore
-        `http://localhost:8080/api/auth/khachhang/username/${decodedToken?.username}`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/khachhang/username/${decodedToken?.username}`,
         {
           method: "GET",
         },

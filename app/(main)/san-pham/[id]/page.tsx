@@ -24,7 +24,7 @@ export default function ProductPage({
   const [tokenClient, setTokenClient] = useState<string | null>(null);
   const [decoded, setDecoded] = useState<JwtPayload>();
   const { data, isLoading, error } = useSWR<ResponseData<LinhKien>>(
-    `http://localhost:8080/api/kho/linhkien/${params.id}`,
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/kho/linhkien/${params.id}`,
     fetcher,
   );
   // Fetch token client-side to prevent mismatches
@@ -42,7 +42,7 @@ export default function ProductPage({
     try {
       const response = await fetch(
         // @ts-ignore
-        `http://localhost:8080/api/auth/khachhang/username/${decoded?.username}`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/khachhang/username/${decoded?.username}`,
         {
           method: "GET",
         },
@@ -50,7 +50,7 @@ export default function ProductPage({
       const khachhang = await response.json();
 
       const cartResponse = await fetch(
-        `http://localhost:8080/api/kho/giohang`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/kho/giohang`,
         {
           method: "POST",
           headers: {

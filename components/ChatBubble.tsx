@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
 import OpenAI from "openai";
@@ -9,31 +9,7 @@ const ChatbotBubble = () => {
   const [messages, setMessages] = useState<string[]>([]);
   const [input, setInput] = useState("");
   const toggleChat = () => setIsOpen(!isOpen);
-  const [threadId, setThreadId] = useState<string | null>(null);
 
-  useEffect(() => {
-    // Load thread_id from localStorage on component mount
-    const storedThreadId = localStorage.getItem("thread_id");
-    if (storedThreadId) {
-      setThreadId(storedThreadId);
-    } else {
-      createThread(); // Create thread if not found
-    }
-  }, []);
-  const createThread = async () => {
-    try {
-      const response = await axios.post(
-        "http://localhost:8080/api/chatgpt/assistant/createThread",
-      );
-      const newThreadId = response.data?.threadId;
-      if (newThreadId) {
-        localStorage.setItem("thread_id", newThreadId); // Save to localStorage
-        setThreadId(newThreadId); // Update state
-      }
-    } catch (error) {
-      console.error("Error creating thread:", error);
-    }
-  };
   const handleSend = async () => {
     if (!input.trim()) return;
 
@@ -43,18 +19,16 @@ const ChatbotBubble = () => {
     console.log(process.env.NEXT_PUBLIC_OPENAI_API_KEY);
     try {
       const response = await fetch(
-        `http://localhost:8080/api/chatgpt/assistant/sendMessage/asst_dHbO7vLN4NyODS7FGNWUH7Pf/${threadId}`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/phieuhen/category/chat?prompt=${messages}`,
         {
-          method: "POST",
+          method: "GET",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ message: userMessage }),
         },
       );
-      console.log(threadId);
-      const data = await response.json();
-      const botMessage = data.message;
+      const data = await response.text();
+      const botMessage = data;
       setMessages((prev) => [...prev, `Bot: ${botMessage}`]);
     } catch (error) {
       setMessages((prev) => [...prev, "Bot: Sorry, something went wrong."]);

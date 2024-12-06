@@ -6,26 +6,26 @@ import { Input } from "@/components/ui/input";
 import { fetcher } from "@/lib/fetcher";
 
 interface PostsTableProps {
-  id?:number;
+  id?: number;
   limit?: number;
   title?: string;
 }
 
-const CTDonHangaTable = ({id, limit, title }: PostsTableProps) => {
+const CTDonHangaTable = ({ id, limit, title }: PostsTableProps) => {
   const { data, isLoading, error } = useSWR<ResponseData<CtDonHang[]>>(
-    `http://localhost:8080/api/thanh-toan/ct-don-hang/${id}`,
-    fetcher
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/thanh-toan/ct-don-hang/${id}`,
+    fetcher,
   );
   const state = {
     data: data,
     columns: [],
-    searchInput: ""
+    searchInput: "",
   };
   if (isLoading) return <div>Loading...</div>;
   console.log(data?.data);
   return (
     <div className="mt-10">
-      <h3 className="text-2xl mb-4 font-semibold">{title ? title : "Posts"}</h3>
+      <h3 className="mb-4 text-2xl font-semibold">{title ? title : "Posts"}</h3>
       <DataTable
         columns={columns}
         data={data?.data ?? []}

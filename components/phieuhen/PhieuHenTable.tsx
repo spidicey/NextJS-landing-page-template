@@ -71,7 +71,7 @@ const PhieuHenTable = ({ title }: PostsTableProps) => {
 
   const { data, isLoading, error } = useSWR<ResponseData<PhieuHen[]>>(
     username
-      ? `http://localhost:8080/api/phieuhen/khachhang/username/${username}`
+      ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/phieuhen/khachhang/username/${username}`
       : null, // Avoid calling SWR until username is available
     fetcher,
   );

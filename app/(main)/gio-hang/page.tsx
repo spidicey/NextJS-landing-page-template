@@ -84,7 +84,7 @@ export default function GioHang() {
       setDecoded(decodedToken);
       fetch(
         // @ts-ignore
-        `http://localhost:8080/api/auth/khachhang/username/${decodedToken?.username}`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/khachhang/username/${decodedToken?.username}`,
         {
           method: "GET",
         },
@@ -96,9 +96,12 @@ export default function GioHang() {
   useEffect(() => {
     // Fetch cart only when khachhang data is available
     if (khachhang) {
-      fetch(`http://localhost:8080/api/kho/giohang/${khachhang.idKhachHang}`, {
-        method: "GET",
-      })
+      fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/kho/giohang/${khachhang.idKhachHang}`,
+        {
+          method: "GET",
+        },
+      )
         .then((response) => response.json())
         .then((cartData) => {
           console.log(cartData.data);
@@ -152,7 +155,7 @@ export default function GioHang() {
       };
 
       const response = await fetch(
-        "http://localhost:8080/api/thanh-toan/don-hang",
+        "${process.env.NEXT_PUBLIC_API_BASE_URL}/api/thanh-toan/don-hang",
         {
           method: "POST",
           headers: {
@@ -165,9 +168,9 @@ export default function GioHang() {
 
       if (response.ok) {
         const result = await response.json();
-        
+
         const paymentResponse = await axios.get(
-          `http://localhost:8080/api/thanh-toan/submitOrder`,
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/thanh-toan/submitOrder`,
           options,
         );
         toast({
@@ -191,7 +194,7 @@ export default function GioHang() {
   const updateQuantity = async (idSanPham: number, soLuong: number) => {
     try {
       const cartResponse = await fetch(
-        `http://localhost:8080/api/kho/giohang`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/kho/giohang`,
         {
           method: "PUT",
           headers: {
@@ -373,7 +376,7 @@ export default function GioHang() {
         <Link href="/san-pham">
           <Button variant="outline">TIếp tục mua</Button>
         </Link>
-          <Button onClick={handleCheckout}>Mua</Button>
+        <Button onClick={handleCheckout}>Mua</Button>
       </div>
     </div>
   );

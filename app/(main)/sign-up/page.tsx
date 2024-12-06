@@ -45,11 +45,14 @@ export default function RegistrationForm() {
     console.log(data);
     try {
       setIsLoading(true);
-      const response = await fetch("http://localhost:8080/api/auth/khachhang", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
+      const response = await fetch(
+        "${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/khachhang",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        },
+      );
 
       const result = await response.json();
       setIsLoading(false);

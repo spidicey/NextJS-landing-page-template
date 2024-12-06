@@ -59,7 +59,9 @@ export default function ProfileForm() {
   useEffect(() => {
     if (!username) return;
 
-    fetch(`http://localhost:8080/api/auth/nhanvien/username/${username}`)
+    fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/nhanvien/username/${username}`,
+    )
       .then((res) => res.json())
       .then((data) => {
         setNhanVienData(data);
@@ -82,14 +84,17 @@ export default function ProfileForm() {
       idNhanVien: nhanVienData.data.idNhanVien,
     };
 
-    const response = await fetch(`http://localhost:8080/api/auth/nhanvien`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        authorization: `Bearer ${token}`,
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/nhanvien`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(updatedData),
       },
-      body: JSON.stringify(updatedData),
-    });
+    );
 
     if (response.ok) {
       toast({

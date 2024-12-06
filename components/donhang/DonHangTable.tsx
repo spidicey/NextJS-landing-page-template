@@ -12,13 +12,13 @@ interface PostsTableProps {
 
 const DonHangTable = ({ limit, title, idKhachHang }: PostsTableProps) => {
   const { data, isLoading, error } = useSWR<ResponseData<DonHang[]>>(
-    `http://localhost:8080/api/thanh-toan/don-hang/khach-hang/${idKhachHang}`,
-    fetcher
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/thanh-toan/don-hang/khach-hang/${idKhachHang}`,
+    fetcher,
   );
   if (isLoading) return <div>Loading...</div>;
   return (
     <div className="mt-10">
-      <h3 className="text-2xl mb-4 font-semibold">{title ? title : "Posts"}</h3>
+      <h3 className="mb-4 text-2xl font-semibold">{title ? title : "Posts"}</h3>
       {/* <AddPhieuSua/> */}
       <DataTable
         columns={columns}

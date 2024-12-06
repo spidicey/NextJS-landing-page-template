@@ -47,7 +47,7 @@ export default function DatLichPage() {
   const { toast } = useToast();
   const [date, setDate] = React.useState<Date>();
   const { data, isLoading, error } = useSWR<ResponseData<Category[]>>(
-    `http://localhost:8080/api/phieuhen/category`,
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/phieuhen/category`,
     fetcher,
   );
   //   console.log(data?.data);
@@ -69,14 +69,17 @@ export default function DatLichPage() {
       idKhachHang: 1,
       trangThai: "Đang chờ",
     };
-    const response = await fetch(`http://localhost:8080/api/phieuhen`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        authorization: "",
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/phieuhen`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: "",
+        },
+        body: JSON.stringify(createData),
       },
-      body: JSON.stringify(createData),
-    });
+    );
     if (response.ok) {
       toast({
         title: "Thêm thành công",

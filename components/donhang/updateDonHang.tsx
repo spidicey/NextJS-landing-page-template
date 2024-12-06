@@ -28,8 +28,8 @@ export function UpdateDonHang({ idIDDonHang }: IDDonHang) {
   const [soLuong, setSoLuong] = useState<number>(0);
   const [ghiChu, setGhiChu] = useState<string>("");
   const { data, isLoading, error } = useSWR<ResponseData<PhieuXuat>>(
-    `http://localhost:8080/api/kho/phieuxuat/${idIDDonHang}`,
-    fetcher
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/kho/phieuxuat/${idIDDonHang}`,
+    fetcher,
   );
   if (isLoading) return <div>Loading</div>;
 
@@ -44,14 +44,17 @@ export function UpdateDonHang({ idIDDonHang }: IDDonHang) {
       ghiChu,
     };
     console.log(updatedData);
-    const response = await fetch(`http://localhost:8080/api/kho/phieunhap`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        authorization: "",
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/kho/phieunhap`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: "",
+        },
+        body: JSON.stringify(updatedData),
       },
-      body: JSON.stringify(updatedData),
-    });
+    );
     if (response.ok) {
       toast({
         title: "Cập nhật thành công",
