@@ -20,6 +20,7 @@ export const columns: ColumnDef<PhieuHen>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="ID" />
     ),
+    filterFn: "includesString",
   },
   {
     accessorKey: "ngayHen",

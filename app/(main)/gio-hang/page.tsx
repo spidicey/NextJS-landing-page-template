@@ -48,32 +48,17 @@ export default function GioHang() {
   const [loading, setLoading] = useState(true);
   const [diaChi, setDiaChi] = useState("");
   const [soDienThoai, setSoDienThoai] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState("VNPAY");
   const handleDiaChiChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDiaChi(e.target.value);
   };
   const handleSoDienThoaiChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSoDienThoai(e.target.value);
   };
-
-  //   // {
-  //   //   id: 1,
-  //   //   name: "Hamburger",
-  //   //   price: 9.99,
-  //   //   quantity: 1,
-  //   // },
-  //   // {
-  //   //   id: 2,
-  //   //   name: "Fries",
-  //   //   price: 4.99,
-  //   //   quantity: 2,
-  //   // },
-  //   // {
-  //   //   id: 3,
-  //   //   name: "Coca-Cola",
-  //   //   price: 2.99,
-  //   //   quantity: 1,
-  //   // },
-  // ]);
+  const onTabChange = (value: any) => {
+    console.log(value);
+    setPaymentMethod(value);
+  };
   useEffect(() => {
     const token = Cookies.get("token-client");
     if (token) {
@@ -123,7 +108,7 @@ export default function GioHang() {
       alert("Please ensure cart is not empty and address is filled out.");
       return;
     }
-
+    console.log(paymentMethod);
     // Calculate total price
 
     // Format the data according to DonHang JSON structure
@@ -155,7 +140,7 @@ export default function GioHang() {
       };
 
       const response = await fetch(
-        "${process.env.NEXT_PUBLIC_API_BASE_URL}/api/thanh-toan/don-hang",
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/thanh-toan/don-hang`,
         {
           method: "POST",
           headers: {
@@ -168,19 +153,27 @@ export default function GioHang() {
 
       if (response.ok) {
         const result = await response.json();
+        if (paymentMethod.localeCompare("Tiền mặt")) {
+          toast({
+            title: "Đặt hàng thanh cong",
+            description: "vui long xem trang thanh toan.",
+            action: <ToastAction altText="Lưu thành công">Đóng</ToastAction>,
+          });
+        } else {
+          const paymentResponse = await axios.get(
+            `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/thanh-toan/submitOrder`,
+            options,
+          );
+          toast({
+            title: "Đặt hàng thanh cong",
+            description: "vui long xem trang thanh toan.",
+            action: <ToastAction altText="Lưu thành công">Đóng</ToastAction>,
+          });
+          const paymentData = paymentResponse.data;
+          console.log("Payment data:", paymentData);
+          window.open(paymentData, "_self");
+        }
 
-        const paymentResponse = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/thanh-toan/submitOrder`,
-          options,
-        );
-        toast({
-          title: "Đặt hàng thanh cong",
-          description: "vui long xem trang thanh toan.",
-          action: <ToastAction altText="Lưu thành công">Đóng</ToastAction>,
-        });
-        const paymentData = paymentResponse.data;
-        console.log("Payment data:", paymentData);
-        window.open(paymentData, "_self");
         // Optionally clear cart or navigate to another page
       } else {
         console.error("Error placing order:", response.statusText);
@@ -302,7 +295,7 @@ export default function GioHang() {
         </div>
       </div>
 
-      <Tabs defaultValue="VNPAY">
+      <Tabs defaultValue="VNPAY" onValueChange={onTabChange}>
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="VNPAY">
             <Image src="/VNPAY.svg" width={100} height={100} alt="Card Icon" />

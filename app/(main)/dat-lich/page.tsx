@@ -27,7 +27,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { format, isBefore } from "date-fns";
 import useSWR from "swr";
 import { fetcher } from "@/lib/fetcher";
@@ -38,6 +38,9 @@ import { z } from "zod";
 import { useRouter } from "next/navigation";
 import { ToastAction } from "@/components/ui/toast";
 import { useToast } from "@/hooks/use-toast";
+import { jwtDecode } from "jwt-decode";
+import Cookies from "js-cookie";
+
 const userAuthSchema = z.object({
   ngayHen: z.string(),
   idCategory: z.number(),
@@ -46,8 +49,25 @@ type FormData = z.infer<typeof userAuthSchema>;
 export default function DatLichPage() {
   const { toast } = useToast();
   const [date, setDate] = React.useState<Date>();
+  const [username, setUsername] = useState<string | null>(null);
+  useEffect(() => {
+    const token = Cookies.get("token-client");
+    if (token) {
+      try {
+        const decodedToken = jwtDecode<{ username: string }>(token);
+        setUsername(decodedToken.username);
+      } catch (error) {
+        console.error("Invalid token:", error);
+      }
+    }
+  }, []);
   const { data, isLoading, error } = useSWR<ResponseData<Category[]>>(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/phieuhen/category`,
+    fetcher,
+  );
+
+  const { data: khachhangData } = useSWR<ResponseData<KhachHang>>(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/khachhang/username/${username}`,
     fetcher,
   );
   //   console.log(data?.data);
@@ -66,7 +86,7 @@ export default function DatLichPage() {
     const createData = {
       ngayHen: formData.ngayHen,
       idCategory: formData.idCategory,
-      idKhachHang: 1,
+      idKhachHang: khachhangData?.data.idKhachHang,
       trangThai: "Đang chờ",
     };
     const response = await fetch(

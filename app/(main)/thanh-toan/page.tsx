@@ -51,9 +51,7 @@ export default function DemoPaymentMethod() {
                 <Input id="username" defaultValue="@peduarte" />
               </div>
             </CardContent>
-            <CardFooter>
-              <Button>Save changes</Button>
-            </CardFooter>
+
           </Card>
         </TabsContent>
         <TabsContent value="TIền mặt">
@@ -72,9 +70,7 @@ export default function DemoPaymentMethod() {
                 <Input id="new" type="TIền mặt" />
               </div>
             </CardContent>
-            <CardFooter>
-              <Button>Save TIền mặt</Button>
-            </CardFooter>
+            
           </Card>
         </TabsContent>
       </Tabs>
