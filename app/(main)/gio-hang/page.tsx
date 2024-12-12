@@ -153,26 +153,18 @@ export default function GioHang() {
 
       if (response.ok) {
         const result = await response.json();
-        if (paymentMethod.localeCompare("Tiền mặt")) {
-          toast({
-            title: "Đặt hàng thanh cong",
-            description: "vui long xem trang thanh toan.",
-            action: <ToastAction altText="Lưu thành công">Đóng</ToastAction>,
-          });
-        } else {
-          const paymentResponse = await axios.get(
-            `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/thanh-toan/submitOrder`,
-            options,
-          );
-          toast({
-            title: "Đặt hàng thanh cong",
-            description: "vui long xem trang thanh toan.",
-            action: <ToastAction altText="Lưu thành công">Đóng</ToastAction>,
-          });
-          const paymentData = paymentResponse.data;
-          console.log("Payment data:", paymentData);
-          window.open(paymentData, "_self");
-        }
+        const paymentResponse = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/thanh-toan/submitOrder`,
+          options,
+        );
+        toast({
+          title: "Đặt hàng thanh cong",
+          description: "vui long xem trang thanh toan.",
+          action: <ToastAction altText="Lưu thành công">Đóng</ToastAction>,
+        });
+        const paymentData = paymentResponse.data;
+        console.log("Payment data:", paymentData);
+        window.open(paymentData, "_self");
 
         // Optionally clear cart or navigate to another page
       } else {
@@ -301,10 +293,10 @@ export default function GioHang() {
             <Image src="/VNPAY.svg" width={100} height={100} alt="Card Icon" />
             Thanh Toán online
           </TabsTrigger>
-          <TabsTrigger value="TIền mặt">
+          {/* <TabsTrigger value="TIền mặt">
             <Image src="/cash.svg" width={30} height={30} alt="Card Icon" />
             Tiền mặt
-          </TabsTrigger>
+          </TabsTrigger> */}
         </TabsList>
         <TabsContent value="VNPAY">
           <Card>
@@ -334,7 +326,7 @@ export default function GioHang() {
             </CardFooter>
           </Card>
         </TabsContent>
-        <TabsContent value="TIền mặt">
+        {/* <TabsContent value="TIền mặt">
           <Card>
             <CardHeader>
               <CardTitle>TIền mặt</CardTitle>
@@ -363,7 +355,7 @@ export default function GioHang() {
               <Button>Save TIền mặt</Button>
             </CardFooter>
           </Card>
-        </TabsContent>
+        </TabsContent> */}
       </Tabs>
       <div className="mt-4 flex justify-end gap-2">
         <Link href="/san-pham">

@@ -54,13 +54,13 @@ export default function RegistrationForm() {
         },
       );
 
-      const result = await response.json();
+      const result = await response.text();
       setIsLoading(false);
 
       if (!response.ok) {
         toast({
           title: "Đăng ký thất bại",
-          description: result.message || "Có lỗi xảy ra. Vui lòng thử lại.",
+          description: result || "Có lỗi xảy ra. Vui lòng thử lại.",
           variant: "destructive",
         });
         return;
@@ -73,7 +73,7 @@ export default function RegistrationForm() {
       });
 
       // Redirect to the login page after successful registration
-      router.push("/login");
+      router.push("/");
     } catch (error: any) {
       setIsLoading(false);
       toast({

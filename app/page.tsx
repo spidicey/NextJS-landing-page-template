@@ -26,15 +26,14 @@ export default function Home() {
         </h1>
 
         <p className="mt-5 max-w-prose text-lg text-zinc-700 sm:text-2xl">
-          Các dịch vụ sửa chữa đồ điện gia dụng tại A Hàng Đức A Hàng Đức nhận
-          sửa chữa các loại đồ điện gia dụng như: Sửa nồi cơm điện, sửa robot
-          hút bụi, nồi chiên không dầu, lò vi sóng, lò nướng, sửa máy pha café,
-          sửa máy trộn bột, sửa máy giặt, tủ lạnh, máy lạnh – điều hòa, sửa bếp
-          từ, máy hút mùi, máy xay sinh tố… Khách hàng khi có nhu cầu khắc phục
-          mọi sự cố trên thiết bị gia dụng hãy liên hệ chúng tôi. Với nhiều năm
-          kinh nghiệm sửa đồ điện gia dụng, A hàng Đức cam kết mang đến cho quý
-          khách dịch vụ uy tín, tận tâm cùng chi phí tiết kiệm nhất thị trường.
-          Vui lòng liên hệ:
+          Các dịch vụ sửa chữa đồ điện gia dụng tại convo nhận sửa chữa các loại
+          đồ điện gia dụng như: Sửa nồi cơm điện, sửa robot hút bụi, nồi chiên
+          không dầu, lò vi sóng, lò nướng, sửa máy pha café, sửa máy trộn bột,
+          sửa máy giặt, tủ lạnh, máy lạnh – điều hòa, sửa bếp từ, máy hút mùi,
+          máy xay sinh tố… Khách hàng khi có nhu cầu khắc phục mọi sự cố trên
+          thiết bị gia dụng hãy liên hệ chúng tôi. Với nhiều năm kinh nghiệm sửa
+          đồ điện gia dụng, Convo cam kết mang đến cho quý khách dịch vụ uy tín,
+          tận tâm cùng chi phí tiết kiệm nhất thị trường. Vui lòng liên hệ:
         </p>
 
         <Link
@@ -185,12 +184,12 @@ export default function Home() {
             <div className="flex items-center justify-center">
               <div className="flex flex-col gap-6 md:flex-row">
                 <Card className="flex flex-col items-center justify-center gap-2 p-6 md:flex-1">
-                  <CardTitle>Whisper AI</CardTitle>
+                  <CardTitle>NextJS</CardTitle>
                   <CardDescription className="mb-3 text-center">
-                    Speech to text
+                    Nextjs
                   </CardDescription>
                   <Image
-                    src="/mic.webp"
+                    src="/nextjs.png"
                     alt="cafe scenario"
                     width={128}
                     height={128}
@@ -199,12 +198,12 @@ export default function Home() {
                   />
                 </Card>
                 <Card className="flex flex-col items-center justify-center gap-2 p-6 md:flex-1">
-                  <CardTitle>GPT 4</CardTitle>
+                  <CardTitle>RASA</CardTitle>
                   <CardDescription className="mb-3 text-center">
-                    Comprehensive prompts and responses
+                    Chat bot rasa
                   </CardDescription>
                   <Image
-                    src="/openai.webp"
+                    src="/rasa.png"
                     alt="cafe scenario"
                     width={128}
                     height={128}
@@ -214,12 +213,12 @@ export default function Home() {
                 </Card>
 
                 <Card className="flex flex-col items-center justify-center gap-2 p-6 md:flex-1">
-                  <CardTitle>WebSpeech</CardTitle>
+                  <CardTitle>Docker</CardTitle>
                   <CardDescription className="mb-3 text-center">
-                    Text to speech
+                    Docker
                   </CardDescription>
                   <Image
-                    src="/speaker.webp"
+                    src="/docker.png"
                     alt="cafe scenario"
                     width={128}
                     height={128}

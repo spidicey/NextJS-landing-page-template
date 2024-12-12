@@ -91,11 +91,11 @@ export default function ChangePasswordForm() {
         <div className="space-y-8">
           <Card>
             <CardHeader>
-              <div>Change Password</div>
+              <div>Đổi mật khẩu</div>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="current-password">Current Password</Label>
+                <Label htmlFor="current-password">Mật khẩu hiện tại</Label>
                 <Input
                   type="password"
                   id="current-password"
@@ -108,7 +108,7 @@ export default function ChangePasswordForm() {
                 )}
               </div>
               <div className="space-y-2">
-                <Label htmlFor="new-password">New Password</Label>
+                <Label htmlFor="new-password">Mật khẩu mới</Label>
                 <Input
                   type="password"
                   id="new-password"
@@ -121,7 +121,7 @@ export default function ChangePasswordForm() {
                 )}
               </div>
               <div className="space-y-2">
-                <Label htmlFor="confirm-password">Confirm Password</Label>
+                <Label htmlFor="confirm-password">Xác nhận mật khẩu</Label>
                 <Input
                   type="password"
                   id="confirm-password"
@@ -137,7 +137,7 @@ export default function ChangePasswordForm() {
           </Card>
         </div>
         <div className="pt-6">
-          <Button type="submit">Save</Button>
+          <Button type="submit">Lưu</Button>
         </div>
       </div>
     </form>

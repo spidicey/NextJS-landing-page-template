@@ -21,20 +21,20 @@ import { toast } from "@/hooks/use-toast";
 import { jwtDecode } from "jwt-decode";
 
 const profileFormSchema = z.object({
-  hoTen: z.string(),
-  sdt: z.string(),
+  tenKhachHang: z.string(),
+  dienThoai: z.string(),
   diaChi: z.string(),
-  chucVu: z.string(),
+  maSoThue: z.string(),
 });
 
 type ProfileFormValues = z.infer<typeof profileFormSchema>;
 
 export default function ProfileForm() {
   const [username, setUsername] = useState<string | null>(null);
-  const [nhanVienData, setNhanVienData] = useState<ResponseData<NhanVien>>();
+  const [nhanVienData, setNhanVienData] = useState<ResponseData<KhachHang>>();
 
   useEffect(() => {
-    const token = Cookies.get("token");
+    const token = Cookies.get("token-client");
     if (token) {
       try {
         const decodedToken = jwtDecode<{ username: string }>(token);
@@ -48,10 +48,10 @@ export default function ProfileForm() {
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileFormSchema),
     defaultValues: {
-      hoTen: "",
-      sdt: "",
+      tenKhachHang: "",
+      dienThoai: "",
       diaChi: "",
-      chucVu: "",
+      maSoThue: "",
     },
     mode: "onChange",
   });
@@ -60,15 +60,15 @@ export default function ProfileForm() {
     if (!username) return;
 
     fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/nhanvien/username/${username}`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/khachhang/username/${username}`,
     )
       .then((res) => res.json())
       .then((data) => {
         setNhanVienData(data);
-        form.setValue("hoTen", data?.data?.hoTen || "");
-        form.setValue("sdt", data?.data?.sdt || "");
+        form.setValue("tenKhachHang", data?.data?.hoTen || "");
+        form.setValue("dienThoai", data?.data?.sdt || "");
         form.setValue("diaChi", data?.data?.diaChi || "");
-        form.setValue("chucVu", data?.data?.chucVu || "");
+        form.setValue("maSoThue", data?.data?.chucVu || "");
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -81,16 +81,16 @@ export default function ProfileForm() {
     const token = Cookies.get("token");
     const updatedData = {
       ...data,
-      idNhanVien: nhanVienData.data.idNhanVien,
+      idKhachHang: nhanVienData.data.idKhachHang,
     };
 
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/nhanvien`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/khachhang`,
       {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          authorization: `Bearer ${token}`,
+          authorization: ``,
         },
         body: JSON.stringify(updatedData),
       },
@@ -120,7 +120,7 @@ export default function ProfileForm() {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
           control={form.control}
-          name="hoTen"
+          name="tenKhachHang"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Họ Tên</FormLabel>
@@ -134,7 +134,7 @@ export default function ProfileForm() {
 
         <FormField
           control={form.control}
-          name="sdt"
+          name="dienThoai"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Số Điện Thoại</FormLabel>
@@ -162,12 +162,12 @@ export default function ProfileForm() {
 
         <FormField
           control={form.control}
-          name="chucVu"
+          name="maSoThue"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Chức Vụ</FormLabel>
+              <FormLabel>Mã Số Thuế</FormLabel>
               <FormControl>
-                <Input placeholder="Chức Vụ" {...field} />
+                <Input placeholder="Mã Số Thuế" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

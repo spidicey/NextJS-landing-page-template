@@ -4,7 +4,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -24,6 +23,7 @@ const userAuthSchema = z.object({
   password: z.string(),
 });
 type FormData = z.infer<typeof userAuthSchema>;
+
 export default function LoginForm() {
   const router = useRouter();
   const {
@@ -34,6 +34,7 @@ export default function LoginForm() {
     resolver: zodResolver(userAuthSchema),
   });
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
+
   async function onSubmit(data: FormData) {
     console.log(data);
     try {
@@ -65,16 +66,21 @@ export default function LoginForm() {
       }
 
       // Lưu token vào cookies
-      Cookies.set("token-client", signInResult.accessToken, { expires: 7 }); // Lưu token hết hạn sau 7 ngày hoặc theo yêu cầu
+      Cookies.set("token-client", signInResult.accessToken, { expires: 7 });
 
       toast({
         title: "Đăng nhập thành công",
         description: "Bạn đã đăng nhập thành công.",
         variant: "default",
       });
-
-      // Chuyển hướng tới trang chủ hoặc trang khác
       router.push("/");
+
+      // Use setTimeout to delay the reload, allowing the router to finish the navigation
+      setTimeout(() => {
+        window.location.reload(); // This will reload the page after the navigation
+      }, 300); // Adjust t
+
+      // Trigger a re-render for the Navbar to update the token state
     } catch (error: any) {
       setIsLoading(false);
       toast({
@@ -86,6 +92,7 @@ export default function LoginForm() {
       });
     }
   }
+
   return (
     <div className="flex h-screen items-center justify-center">
       <Card className="w-full max-w-sm ">
@@ -117,7 +124,7 @@ export default function LoginForm() {
             <div className="grid gap-2">
               <Label htmlFor="password">Mật khẩu</Label>
               <Input
-                id="pasword"
+                id="password"
                 placeholder="Mật khẩu"
                 type="password"
                 autoCapitalize="none"

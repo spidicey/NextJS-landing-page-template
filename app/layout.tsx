@@ -10,8 +10,8 @@ import { useEffect } from "react";
 
 // Declare the custom element
 import Script from "next/script";
-import Providers from "@/components/Providers";
 import ChatbotBubble from "@/components/ChatBubble";
+import RasaChat from "@/components/rasachat";
 
 // export const metadata: Metadata = {
 //   title: "Convo | Language Learning",
@@ -25,7 +25,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="light">
-      <Providers>
         <body
           className={cn(
             "grainy flex min-h-screen flex-col font-sans antialiased",
@@ -34,10 +33,11 @@ export default function RootLayout({
         >
           <Navbar />
           {children}
-          <ChatbotBubble/>
+          {/* <ChatbotBubble/>
+           */}
+          <RasaChat />
           <Toaster />
         </body>
-      </Providers>
     </html>
   );
 }

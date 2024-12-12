@@ -19,74 +19,96 @@ function formatDate(date: Date): string {
   const year = date.getFullYear();
   return `${day}/${month}/${year}`;
 }
-export const columns: ColumnDef<DonHang>[] = [
+export const columns: ColumnDef<PhieuSua>[] = [
   {
-    accessorKey: "idDonHang",
+    accessorKey: "idPhieuSua",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="ID đơn hàng" />
+      <DataTableColumnHeader column={column} title="ID Phiếu Sửa" />
     ),
   },
   {
-    accessorKey: "idKhachHang",
+    accessorKey: "khachHang",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Khách Hàng" />
     ),
-    // cell: (info) => (info.getValue() as KhachHang)?.tenKhachHang,
+    filterFn: (row, columnId, value) => {
+      const khachHang = row.getValue(columnId) as KhachHang;
+      console.log(
+        khachHang?.tenKhachHang?.toLowerCase().includes(value.toLowerCase()),
+      );
+      return khachHang?.tenKhachHang
+        ?.toLowerCase()
+        .includes(value.toLowerCase());
+    },
+    cell: (info) => (info.getValue() as KhachHang)?.tenKhachHang,
   },
   {
-    accessorKey: "tongTien",
+    accessorKey: "tenSanPham",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Tổng tiền" />
+      <DataTableColumnHeader column={column} title="Tên Sản Phẩm" />
     ),
   },
   {
-    accessorKey: "ngayDat",
+    accessorKey: "nhanVien",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Ngày đặt" />
+      <DataTableColumnHeader column={column} title="Nhân Viên" />
+    ),
+    cell: (info) => (info.getValue() as NhanVien)?.hoTen,
+  },
+  {
+    accessorKey: "moTa",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Mô Tả" />
+    ),
+  },
+  {
+    accessorKey: "loaiSuaChua",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Loại Sửa Chữa" />
+    ),
+  },
+  {
+    accessorKey: "baoGia",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Báo Giá" />
+    ),
+  },
+  {
+    accessorKey: "ngayTao",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Ngày Tạo" />
+    ),
+    cell: (info) => new Date(info.getValue() as Date).toLocaleDateString(),
+  },
+  {
+    accessorKey: "giaLinhKien",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Giá linh kiện" />
+    ),
+  },
+  {
+    accessorKey: "tongGia",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Tổng Giá" />
     ),
     cell: ({ row }) => {
-      const date = new Date(row.getValue("ngayDat"));
-      return formatDate(date);
+      const baoGia = (row.getValue("baoGia") as number) || 0;
+      const giaLinhKien = (row.getValue("giaLinhKien") as number) || 0;
+      const loaiSuaChua = (row.getValue("loaiSuaChua") as String) || "Sửa chữa";
+      const tongGia = baoGia + giaLinhKien;
+      if (loaiSuaChua === "Bảo hành") {
+        return "0 đ";
+      }
+      return tongGia.toLocaleString("vi-VN", {
+        style: "currency",
+        currency: "VND",
+      });
     },
   },
   {
-    accessorKey: "diaChi",
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Địa chỉ" />
-    ),
-  },
-  {
-    accessorKey: "trangThai",
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Trạng thái" />
-    ),
-  },
-  {
-    accessorKey: "sdt",
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Số điện thoại" />
-    ),
-  },
-  {
-    accessorKey: "thanhToan",
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Thanh toán" />
-    ),
-    // cell: (info) => new Date(info.getValue() as Date).toLocaleDateString(),
-  },
-  // {
-  //   accessorKey: "view",
-  //   header: ({ column }) => (
-  //     <DataTableColumnHeader column={column} title="View" />
-  //   ),
-  //   cell: (info) => (
-  //     <UpdateDonHang idIDDonHang={info.row.original.idKhachHang} />
-  //   ),
-  // },
-  {
     id: "actions",
     cell: ({ row }) => {
-      const donhang = row.original;
+      const phieusua = row.original;
 
       return (
         <DropdownMenu>
@@ -99,9 +121,7 @@ export const columns: ColumnDef<DonHang>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem>
-              <Link href={`/profile/donhang/${donhang.idDonHang}`}>
-                Chi tiết
-              </Link>
+              <Link href={`/profile/donhang/${phieusua.idPhieuSua}`}>Chi tiết</Link>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

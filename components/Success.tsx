@@ -9,7 +9,7 @@ export default function SuccessPage() {
         <Card className="w- p-16">
           <div className="flex flex-col items-center gap-5 p-10">
             <Success />
-            <h1 className="text-2xl font-bold">Đặt vé thành công</h1>
+            <h1 className="text-2xl font-bold">Đặt hàng thành công</h1>
             <p className="text-lg">
               Quý khác đã thanh toán thành công vui lòng vào bill để xem chi
               tiết

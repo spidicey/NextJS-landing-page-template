@@ -13,7 +13,7 @@ interface PostsTableProps {
 
 const CTDonHangaTable = ({ id, limit, title }: PostsTableProps) => {
   const { data, isLoading, error } = useSWR<ResponseData<CtDonHang[]>>(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/thanh-toan/ct-don-hang/${id}`,
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/phieusua/details/phieusua/${id}`,
     fetcher,
   );
   const state = {

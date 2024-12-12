@@ -9,7 +9,7 @@ export default function FailPage() {
         <Card className="w- p-16">
           <div className="flex flex-col items-center gap-5 p-10">
             <Fail />
-            <h1 className="text-2xl font-bold">Đặt vé thất bại</h1>
+            <h1 className="text-2xl font-bold">Đặt hàng thất bại</h1>
             <p className="text-lg">
               Đã xảy ra lỗi trong quá trình thanh toán. Xin quý khách vui lòng
               thử lại

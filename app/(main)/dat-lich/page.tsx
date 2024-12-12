@@ -40,10 +40,13 @@ import { ToastAction } from "@/components/ui/toast";
 import { useToast } from "@/hooks/use-toast";
 import { jwtDecode } from "jwt-decode";
 import Cookies from "js-cookie";
+import { Textarea } from "@/components/ui/textarea";
 
 const userAuthSchema = z.object({
   ngayHen: z.string(),
   idCategory: z.number(),
+  ghiChu: z.string(),
+  maPhieuBaoHanh: z.string(),
 });
 type FormData = z.infer<typeof userAuthSchema>;
 export default function DatLichPage() {
@@ -87,6 +90,8 @@ export default function DatLichPage() {
       ngayHen: formData.ngayHen,
       idCategory: formData.idCategory,
       idKhachHang: khachhangData?.data.idKhachHang,
+      ghiChu: formData.ghiChu,
+      maPhieuBaoHanh: formData.maPhieuBaoHanh,
       trangThai: "Đang chờ",
     };
     const response = await fetch(
@@ -107,9 +112,10 @@ export default function DatLichPage() {
         action: <ToastAction altText="Lưu thành công">Đóng</ToastAction>,
       });
     } else {
+      const a = await response.json();
       toast({
         title: "Thêm thất bại",
-        description: "Đã xảy ra lỗi trong quá trình thêm.",
+        description: a.message,
         action: <ToastAction altText="Lưu thất bại">Đóng</ToastAction>,
       });
     }
@@ -165,6 +171,37 @@ export default function DatLichPage() {
               {errors?.idCategory && (
                 <p className="px-1 text-xs text-red-600">
                   {errors.idCategory.message}
+                </p>
+              )}
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="Ghi chú">Ghi chú</Label>
+              <Textarea
+                id="note"
+                autoCapitalize="none"
+                autoCorrect="off"
+                disabled={isLoading}
+                {...register("ghiChu")}
+              />
+              {errors?.ghiChu && (
+                <p className="px-1 text-xs text-red-600">
+                  {errors.ghiChu.message}
+                </p>
+              )}
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="Phiếu bảo hành">Phiếu bảo hành (nếu có)</Label>
+              <Input
+                id="phieubaohanh"
+                type="number"
+                autoCapitalize="none"
+                autoCorrect="off"
+                disabled={isLoading}
+                {...register("maPhieuBaoHanh")}
+              />
+              {errors?.maPhieuBaoHanh && (
+                <p className="px-1 text-xs text-red-600">
+                  {errors.maPhieuBaoHanh.message}
                 </p>
               )}
             </div>
