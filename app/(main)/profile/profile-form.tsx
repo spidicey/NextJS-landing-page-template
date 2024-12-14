@@ -65,10 +65,10 @@ export default function ProfileForm() {
       .then((res) => res.json())
       .then((data) => {
         setNhanVienData(data);
-        form.setValue("tenKhachHang", data?.data?.hoTen || "");
-        form.setValue("dienThoai", data?.data?.sdt || "");
+        form.setValue("tenKhachHang", data?.data?.tenKhachHang || "");
+        form.setValue("dienThoai", data?.data?.dienThoai || "");
         form.setValue("diaChi", data?.data?.diaChi || "");
-        form.setValue("maSoThue", data?.data?.chucVu || "");
+        form.setValue("maSoThue", data?.data?.maSoThue || "");
       })
       .catch((error) => {
         console.error("Error fetching data:", error);

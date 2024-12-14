@@ -55,12 +55,12 @@ export default function Navbar() {
                   >
                     Đặt lịch
                   </Link>
-                  <Link
+                  {/* <Link
                     href="/gio-hang"
                     className={buttonVariants({ variant: "ghost", size: "sm" })}
                   >
                     <ShoppingCart />
-                  </Link>
+                  </Link> */}
 
                   <DropdownMenu>
                     <DropdownMenuTrigger className="focus:outline-none">
